@@ -13,35 +13,88 @@ function getHumanChoice() {
   return prompt('What is your choice?', 'Scissors');
 }
 
-function playRound(humanChoice, computerChoice) {
-  let lowerCaseHumanChoice = humanChoice.toLowerCase();
-  let lowerCaseComputerChoice = computerChoice.toLowerCase();
+function playGame() {
+  let computerWins = 0;
+  let playerWins = 0;
 
-  if (lowerCaseHumanChoice === 'scissors' && lowerCaseComputerChoice === 'scissors'
-    || lowerCaseHumanChoice === 'paper' && lowerCaseComputerChoice === 'paper'
-    || lowerCaseHumanChoice === 'rock' && lowerCaseComputerChoice === 'rock'
-  ) {
-    return "It's a draw!";
-  } else if (lowerCaseHumanChoice === 'scissors' && lowerCaseComputerChoice === 'paper') {
-    playerWins++;
-    return 'Scissors cuts paper, you win!';
-  } else if (lowerCaseHumanChoice === 'scissors' && lowerCaseComputerChoice === 'rock') {
-    computerWins++;
-    return 'Rock beats scissors, you lose!';
-  } else if (lowerCaseHumanChoice === 'paper' && lowerCaseComputerChoice === 'scissors') {
-    computerWins++;
-    return 'Scissors cuts paper, you lose!';
-  } else if (lowerCaseComputerChoice === 'paper' && lowerCaseComputerChoice === 'rock') {
-    playerWins++;
-    return 'Paper wraps rock, you win!';
-  } else if (lowerCaseHumanChoice === 'rock' && lowerCaseComputerChoice === 'scissors') {
-    playerWins++;
-    return 'Rock beats scissors, you win!';
-  } else if (lowerCaseHumanChoice === 'rock' && lowerCaseComputerChoice === 'paper') {
-    computerWins++;
-    return 'Paper wraps rock, you lose!';
+  function playRound(humanChoice, computerChoice) {
+    let lowerCaseHumanChoice = humanChoice.toLowerCase();
+    let lowerCaseComputerChoice = computerChoice.toLowerCase();
+
+    let humanSelection;
+    let computerSelection;
+
+    if (
+      (lowerCaseHumanChoice === 'scissors' &&
+        lowerCaseComputerChoice === 'scissors') ||
+      (lowerCaseHumanChoice === 'paper' &&
+        lowerCaseComputerChoice === 'paper') ||
+      (lowerCaseHumanChoice === 'rock' && lowerCaseComputerChoice === 'rock')
+    ) {
+      console.log("It's a draw!");
+      return;
+    } else if (
+      lowerCaseHumanChoice === 'scissors' &&
+      lowerCaseComputerChoice === 'paper'
+    ) {
+      playerWins++;
+      console.log('Scissors cuts paper, you win!');
+      return;
+    } else if (
+      lowerCaseHumanChoice === 'scissors' &&
+      lowerCaseComputerChoice === 'rock'
+    ) {
+      computerWins++;
+      console.log('Rock beats scissors, you lose!');
+      return;
+    } else if (
+      lowerCaseHumanChoice === 'paper' &&
+      lowerCaseComputerChoice === 'scissors'
+    ) {
+      computerWins++;
+      console.log('Scissors cuts paper, you lose!');
+      return;
+    } else if (
+      lowerCaseComputerChoice === 'paper' &&
+      lowerCaseComputerChoice === 'rock'
+    ) {
+      playerWins++;
+      console.log('Paper wraps rock, you win!');
+      return;
+    } else if (
+      lowerCaseHumanChoice === 'rock' &&
+      lowerCaseComputerChoice === 'scissors'
+    ) {
+      playerWins++;
+      console.log('Rock beats scissors, you win!');
+      return;
+    } else if (
+      lowerCaseHumanChoice === 'rock' &&
+      lowerCaseComputerChoice === 'paper'
+    ) {
+      computerWins++;
+      console.log('Paper wraps rock, you lose!');
+      return;
+    }
+  }
+
+  for (let i = 0; i < 5; i++) {
+    humanSelection = getHumanChoice();
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+    console.log(playerWins, computerWins)
+  }
+
+  if (playerWins > computerWins) {
+    console.log('Congratulations! You won!');
+    return;
+  } else if (playerWins < computerWins) {
+    console.log('You lose, sorry!');
+    return;
+  } else {
+    console.log("It's a draw!");
+    return;
   }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+playGame();
