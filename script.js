@@ -11,3 +11,7 @@ function getComputerChoice() {
     return 'Rock';
   }
 }
+
+function getHumanChoice() {
+  return prompt('What is your choice?', 'Scissors');
+}
